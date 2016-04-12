@@ -70,6 +70,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_login);
         // Set up the login form.
+        Firebase ref = new Firebase("htttps://dazzling-heat-7399.firebaseio.com");
+
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
 
