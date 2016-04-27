@@ -62,11 +62,15 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void signUp(String em, String pass, String usr, String cpass) {
         boolean check = pass.equals(cpass);
+        boolean uCheck = usr.equals("");
         if (check == false) {
             showErrorDialog("Passwords Do Not Match");
             passwords.setText("");
             cpasswords.setText("");
-        } else {
+        } else if (uCheck == true) {
+            showErrorDialog("Please Enter a Username");
+        }
+        else {
             GUser newUsr = new GUser(usr, em, pass);
             createFbUser(newUsr);
         }

@@ -136,13 +136,13 @@ public class LoginActivity extends AppCompatActivity {
         mFirebaseRef.addAuthStateListener(mAuthStateListener);
     }
 
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        String message = intent.getStringExtra(HomeActivity.LOGOUT_MESSAGE);
-        if(message =="logout") {
-            logout();
-        }
-    }
+    //protected void onNewIntent(Intent intent) {
+    //    super.onNewIntent(intent);
+    //    String message = intent.getStringExtra(HomeActivity.LOGOUT_MESSAGE);
+    //    if(message =="logout") {
+    //        logout();
+    //    }
+    // }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
