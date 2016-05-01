@@ -2,6 +2,7 @@ package com.tssssa.sgaheer.groupify;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.realtime.util.StringListReader;
 
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,11 +27,14 @@ public class SignUpActivity extends AppCompatActivity {
     private TextView passwords;
     private TextView usernames;
     private TextView cpasswords;
+    private Toast toast;
+    private Context context;
 
     private String em;
     private String pass;
     private String usr;
     private String cpass;
+    private CharSequence toastText;
 
     private Firebase mFirebaseRef;
 
@@ -71,13 +76,14 @@ public class SignUpActivity extends AppCompatActivity {
             showErrorDialog("Please Enter a Username");
         }
         else {
-            GUser newUsr = new GUser(usr, em, pass);
+            GUser newUsr = new GUser(usr, em, pass, "", "false");
             createFbUser(newUsr);
         }
     }
 
     private void createFbUser(final GUser newUsr) {
         mAuthProgressDialog = new ProgressDialog(this);
+        context = getApplicationContext();
         mAuthProgressDialog.setTitle("Loading");
         mAuthProgressDialog.setMessage("Authenticating with Firebase");
         mAuthProgressDialog.setCancelable(false);
@@ -95,7 +101,8 @@ public class SignUpActivity extends AppCompatActivity {
                       authMap.put("email", newUsr.getEmail());
                       authMap.put("password", newUsr.getPassword());
                       mFirebaseRef.child("users").child(authData.getUid()).setValue(authMap);
-                      showSuccessDialog("Successfully created account with uid: " + authData.getUid());
+                      toastText = "Successfully Created Account";
+                      toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
                   }
                   @Override
                   public void onAuthenticationError(FirebaseError firebaseError) {
@@ -114,15 +121,6 @@ public class SignUpActivity extends AppCompatActivity {
     private void showErrorDialog(String message) {
         new AlertDialog.Builder(this)
                 .setTitle("Error")
-                .setMessage(message)
-                .setPositiveButton(android.R.string.ok, null)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
-    }
-
-    private void showSuccessDialog(String message) {
-        new AlertDialog.Builder(this)
-                .setTitle("Success")
                 .setMessage(message)
                 .setPositiveButton(android.R.string.ok, null)
                 .setIcon(android.R.drawable.ic_dialog_alert)

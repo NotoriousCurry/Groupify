@@ -104,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 lEmail = mEmail.getText().toString();
-                if(lEmail != "") {
+                if (lEmail != "") {
                     goToSign.putExtra(SIGN_MESSAGE, lEmail);
                     startActivity(goToSign);
                 } else {
@@ -186,10 +186,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void setAuthenticatedUser(AuthData authData) {
         if (authData != null) {
-           // mPasswordLoginButton.setVisibility(View.GONE);
-           // mEmail.setVisibility(View.GONE);
-           // mPass.setVisibility(View.GONE);
-
+            //
             String name = null;
             if (authData.getProvider().equals("password")) {
                 name = authData.getUid();
@@ -204,9 +201,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(goToHome);
             }
         } else {
-         //   mPasswordLoginButton.setVisibility(View.VISIBLE);
-         //   mEmail.setVisibility(View.VISIBLE);
-         //   mPass.setVisibility(View.VISIBLE);
+            // implement something here if needed
         }
         this.mAuthData = authData;
         supportInvalidateOptionsMenu();
