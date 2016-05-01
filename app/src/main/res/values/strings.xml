@@ -11,6 +11,8 @@
 
     <string name="action_settings">Settings</string>
     <string name="action_logout">Logout</string>
+    <string name="action_cgroup">Create Group</string>
+
     <string name="login_with_password">Sign In</string>
     <string name="action_signup">Sign Up</string>
 

@@ -1,16 +1,14 @@
 package com.tssssa.sgaheer.groupify;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,6 +27,7 @@ public class HomeActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private CpAdapter mCpAdapter;
     private Firebase mFirebaseRef;
+    private Toolbar homeToolbar;
     public final static String LOGOUT_MESSAGE = "com.tssssa.groupify.LOGOUT";
     public static final int NUM_ITEMS = 3;
 
@@ -38,18 +37,19 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         mLoggedInStatusTextview = (TextView) findViewById(R.id.login_status);
         mFirebaseRef = new Firebase(getResources().getString(R.string.firebase_url));
+
+        homeToolbar = (Toolbar) findViewById(R.id.home_toolbar);
+        setSupportActionBar(homeToolbar);
+
         mCpAdapter = new CpAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mCpAdapter);
-        final ActionBar actionbar = getActionBar();
-
-
 
         Intent intent = getIntent();
         String user = intent.getStringExtra(LoginActivity.EXTRA_MESSAGE);
         //mLoggedInStatusTextview.setText("Logged in as: " + user);
         //mLoggedInStatusTextview.setVisibility(View.VISIBLE);
-        supportInvalidateOptionsMenu();
+       // supportInvalidateOptionsMenu();
 
     }
 
@@ -59,14 +59,18 @@ public class HomeActivity extends AppCompatActivity {
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_logout) {
-            logout();
-            return true;
+        switch(item.getItemId()) {
+            case R.id.action_logout:
+                logout();
+                return true;
+            case R.id.create_group:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     private void logout() {
