@@ -12,6 +12,13 @@
     <string name="action_settings">Settings</string>
     <string name="action_logout">Logout</string>
     <string name="action_cgroup">Create Group</string>
+    <string name="action_cevent">Create Event</string>
+    <string name="create_gname">Enter a Group Name</string>
+    <string name="create_ename">Enter an Event Name</string>
+    <string name="create_gdescription">Description of the Group</string>
+    <string name="create_edescription">Description of the Event</string>
+    <string name="create_gcourse">What Course is this group for?</string>
+    <string name="create_elocation">Enter Event Location</string>
 
     <string name="login_with_password">Sign In</string>
     <string name="action_signup">Sign Up</string>

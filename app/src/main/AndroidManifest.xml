@@ -27,7 +27,18 @@
             </intent-filter>
         </activity>
         <activity android:name=".HomeActivity" />
-        <activity android:name=".SignUpActivity"></activity>
+        <activity
+            android:name=".SignUpActivity"
+            android:noHistory="true"
+            android:parentActivityName=".LoginActivity" />
+        <activity
+            android:name=".CGroupActivity"
+            android:label="@string/action_cgroup"
+            android:parentActivityName=".HomeActivity"></activity>
+        <activity android:name=".CEventActivity"
+            android:parentActivityName=".HomeActivity"
+            android:label="@string/action_cevent">
+        </activity>
     </application>
 
 </manifest>

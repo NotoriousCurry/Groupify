@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -52,6 +54,21 @@ public class SignUpActivity extends AppCompatActivity {
         passwords = (TextView) findViewById(R.id.signup_password);
         usernames = (TextView) findViewById(R.id.signup_username);
         cpasswords = (TextView) findViewById(R.id.confirm_password);
+        cpasswords.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    em = emails.getText().toString();
+                    pass = passwords.getText().toString();
+                    usr = usernames.getText().toString();
+                    cpass = cpasswords.getText().toString();
+                    signUp(em, pass, usr, cpass);
+                    handled = true;
+                }
+                return handled;
+            }
+        });
         sign = (Button) findViewById(R.id.signup);
         sign.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,8 +91,7 @@ public class SignUpActivity extends AppCompatActivity {
             cpasswords.setText("");
         } else if (uCheck == true) {
             showErrorDialog("Please Enter a Username");
-        }
-        else {
+        } else {
             GUser newUsr = new GUser(usr, em, pass, "", "false");
             createFbUser(newUsr);
         }
@@ -93,21 +109,22 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Map<String, Object> result) {
                 mFirebaseRef.authWithPassword(newUsr.getEmail(), newUsr.getPassword(), new Firebase.AuthResultHandler() {
-                  @Override
-                  public void onAuthenticated(AuthData authData) {
-                      HashMap<String, String> authMap = new HashMap<String, String>();
-                      authMap.put("uid", authData.getUid().toString());
-                      authMap.put("username", newUsr.getUsername());
-                      authMap.put("email", newUsr.getEmail());
-                      authMap.put("password", newUsr.getPassword());
-                      mFirebaseRef.child("users").child(authData.getUid()).setValue(authMap);
-                      toastText = "Successfully Created Account";
-                      toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
-                  }
-                  @Override
-                  public void onAuthenticationError(FirebaseError firebaseError) {
-                      showErrorDialog(firebaseError.getMessage());
-                  }
+                    @Override
+                    public void onAuthenticated(AuthData authData) {
+                        HashMap<String, String> authMap = new HashMap<String, String>();
+                        authMap.put("uid", authData.getUid().toString());
+                        authMap.put("username", newUsr.getUsername());
+                        authMap.put("email", newUsr.getEmail());
+                        authMap.put("password", newUsr.getPassword());
+                        mFirebaseRef.child("users").child(authData.getUid()).setValue(authMap);
+                        toastText = "Successfully Created Account";
+                        toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onAuthenticationError(FirebaseError firebaseError) {
+                        showErrorDialog(firebaseError.getMessage());
+                    }
                 });
             }
 

@@ -23,7 +23,6 @@ import com.firebase.client.Firebase;
 
 
 public class HomeActivity extends AppCompatActivity {
-    private TextView mLoggedInStatusTextview;
     private ViewPager mViewPager;
     private CpAdapter mCpAdapter;
     private Firebase mFirebaseRef;
@@ -35,7 +34,6 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        mLoggedInStatusTextview = (TextView) findViewById(R.id.login_status);
         mFirebaseRef = new Firebase(getResources().getString(R.string.firebase_url));
 
         homeToolbar = (Toolbar) findViewById(R.id.home_toolbar);
@@ -47,9 +45,6 @@ public class HomeActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String user = intent.getStringExtra(LoginActivity.EXTRA_MESSAGE);
-        //mLoggedInStatusTextview.setText("Logged in as: " + user);
-        //mLoggedInStatusTextview.setVisibility(View.VISIBLE);
-       // supportInvalidateOptionsMenu();
 
     }
 
@@ -67,6 +62,8 @@ public class HomeActivity extends AppCompatActivity {
                 logout();
                 return true;
             case R.id.create_group:
+                Intent goToCevents = new Intent(this, CEventActivity.class);
+                startActivity(goToCevents);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
