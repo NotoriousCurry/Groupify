@@ -1,5 +1,6 @@
 package com.tssssa.sgaheer.groupify;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -72,9 +73,14 @@ public class HomeActivity extends AppCompatActivity {
 
     private void logout() {
         mFirebaseRef.unauth();
+        killActivity();
+    }
+
+    private void killActivity() {
         Intent goToLogin = new Intent(this, LoginActivity.class);
         goToLogin.putExtra(LOGOUT_MESSAGE, "logout");
         startActivity(goToLogin);
+        finish();
     }
 
 

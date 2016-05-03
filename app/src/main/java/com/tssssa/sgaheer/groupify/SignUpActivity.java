@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -31,6 +32,7 @@ public class SignUpActivity extends AppCompatActivity {
     private TextView cpasswords;
     private Toast toast;
     private Context context;
+    private Toolbar siupToolbar;
 
     private String em;
     private String pass;
@@ -47,6 +49,9 @@ public class SignUpActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String temail = intent.getStringExtra(LoginActivity.SIGN_MESSAGE);
+
+        siupToolbar = (Toolbar) findViewById(R.id.siup_toolbar);
+        setSupportActionBar(siupToolbar);
 
         mFirebaseRef = new Firebase(getResources().getString(R.string.firebase_url));
         emails = (TextView) findViewById(R.id.signup_email);
@@ -85,6 +90,8 @@ public class SignUpActivity extends AppCompatActivity {
     private void signUp(String em, String pass, String usr, String cpass) {
         boolean check = pass.equals(cpass);
         boolean uCheck = usr.equals("");
+        context = getApplicationContext();
+        toastText = "Creating Account";
         if (check == false) {
             showErrorDialog("Passwords Do Not Match");
             passwords.setText("");
@@ -94,6 +101,7 @@ public class SignUpActivity extends AppCompatActivity {
         } else {
             GUser newUsr = new GUser(usr, em, pass, "", "false");
             createFbUser(newUsr);
+            toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
         }
     }
 
