@@ -37,6 +37,7 @@ public class CEventActivity extends AppCompatActivity {
     private String eDescription;
     private String eLocation;
     private ArrayList<String> eAttendees;
+    private String[] sArray;
 
 
     @Override
@@ -90,7 +91,7 @@ public class CEventActivity extends AppCompatActivity {
             toastText = "Creating Group";
             eAttendees = new ArrayList<String>();
             toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
-            GEvents ev = new GEvents(eName, eLocation, eDescription, eAttendees);
+            GEvents ev = new GEvents(eName, eLocation, eDescription, "");
             createGEvent(ev);
         }
     }
@@ -104,9 +105,9 @@ public class CEventActivity extends AppCompatActivity {
         Map<String, Object> attendees = new HashMap<String, Object>();
         Map<String, Object> eid = new HashMap<String, Object>();
 
-        eventDetails.put("name", ev.geteName());
-        eventDetails.put("description", ev.geteDescription());
-        eventDetails.put("location", ev.geteLocation());
+        eventDetails.put("name", ev.getName());
+        eventDetails.put("description", ev.getDescription());
+        eventDetails.put("location", ev.getLocation());
         newPostRef.setValue(eventDetails, new Firebase.CompletionListener() {
             @Override
             public void onComplete(FirebaseError firebaseError, Firebase firebase) {

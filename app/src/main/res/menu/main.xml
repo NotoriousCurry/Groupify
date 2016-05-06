@@ -5,7 +5,13 @@
 
     <item
         android:id="@+id/create_group"
-        android:icon="@drawable/ic_create_black_48dp"
+        android:icon="@drawable/ic_create_white_48dp"
+        android:title="@string/action_refresh"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/refresh_page"
+        android:icon="@drawable/ic_refresh_white_48dp"
         android:title="@string/action_cgroup"
         app:showAsAction="ifRoom"/>
 

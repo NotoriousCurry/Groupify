@@ -6,47 +6,49 @@ import java.util.List;
  * Created by sgaheer on 1/05/2016.
  */
 public class GEvents {
-    private String eName;
-    private String eLocation;
-    private String eDescription;
-    private List<String> eAttendees;
+    private String name;
+    private String location;
+    private String description;
+    private String members;
+    private String id;
 
    public GEvents() {
 
    }
 
-    public GEvents(String eName, String eLocation, String eDescription, List<String> eAttendees) {
-        this.eName = eName;
-        this.eLocation = eLocation;
-        this.eDescription = eDescription;
-        this.eAttendees = eAttendees;
+    public GEvents(String eName, String eLocation, String eDescription, String eAttendees) {
+        this.name = eName;
+        this.location = eLocation;
+        this.description = eDescription;
+        this.members = eAttendees;
+        this.id = "";
     }
 
-    public String geteName() {
-        return eName;
+    public String getName() {
+        return name;
     }
 
-    public String geteLocation() {
-        return eLocation;
+    public String getLocation() {
+        return location;
     }
 
-    public String geteDescription() {
-        return eDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public List<String> geteAttendees() {
-        return eAttendees;
+    public String getMembers() {
+        return members;
     }
 
-    public void seteAttendees(List<String> eAttendees) {
-        this.eAttendees = eAttendees;
+    public void setMembers(String eAttendees) {
+        this.members = eAttendees;
     }
 
-    public void addeAttendees(String eMember) {
-        eAttendees.add(eMember);
-    }
+  //  public void addeAttendees(String eMember) {
+    //    members.add(eMember);
+   // }
 
-    public void removeeAttendees(String eMember) {
-        eAttendees.remove(eMember);
-    }
+   // public void removeeAttendees(String eMember) {
+   //     members.remove(eMember);
+   // }
 }

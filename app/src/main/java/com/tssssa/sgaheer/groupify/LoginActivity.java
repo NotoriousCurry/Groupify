@@ -169,11 +169,11 @@ public class LoginActivity extends AppCompatActivity {
         public void onAuthenticated(AuthData authData) {
             mAuthProgressDialog.hide();
             // Saves some details about user in Firebase
-            Map<String, String> maaps = new HashMap<String, String>();
-            maaps.put("Email", lEmail);
-            mFirebaseRef.child("users").child(authData.getUid()).setValue(maaps);
-            Log.i(TAG, provider + "auth successful");
-            setAuthenticatedUser(authData);
+            //Map<String, String> maaps = new HashMap<String, String>();
+            //maaps.put("Email", lEmail);
+            //mFirebaseRef.child("users").child(authData.getUid()).setValue(maaps);
+            //Log.i(TAG, provider + "auth successful");
+            //setAuthenticatedUser(authData);
         }
 
         @Override
