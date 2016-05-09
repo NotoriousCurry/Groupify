@@ -22,6 +22,7 @@ import java.util.Map;
 
 
 public class CEventActivity extends AppCompatActivity {
+    public final static String CREATE_MESSAGE = "com.tssssa.sgaheer.groupify.CREATE";
     private Toolbar ceventToolbar;
     private Toast toast;
     private Firebase mFirebaseRef;
@@ -152,6 +153,7 @@ public class CEventActivity extends AppCompatActivity {
 
     private void killActivity() {
         Intent intent = new Intent(this, HomeActivity.class);
+        intent.putExtra(CREATE_MESSAGE, "create");
         startActivity(intent);
         finish();
     }

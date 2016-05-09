@@ -23,8 +23,7 @@ import java.util.Map;
  */
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = LoginActivity.class.getSimpleName();
-    public final static String EXTRA_MESSAGE = "com.tssssa.sgaheer.groupify.MESSAGE";
-    public final static String SIGN_MESSAGE = "com.tssssa.sgaheer.groupigy.SIGN";
+    public final static String SIGN_MESSAGE = "com.tssssa.sgaheer.groupify.SIGN";
 
     private ProgressDialog mAuthProgressDialog;
     private Firebase mFirebaseRef;
@@ -138,8 +137,6 @@ public class LoginActivity extends AppCompatActivity {
             if (name != null) {
                 // Go to Home screen if successful login)
                 Intent goToHome = new Intent(this, HomeActivity.class);
-                String user = mEmail.getText().toString();
-                goToHome.putExtra(EXTRA_MESSAGE, user);
                 startActivity(goToHome);
             }
         } else {
