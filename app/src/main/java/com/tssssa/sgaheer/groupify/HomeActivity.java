@@ -2,10 +2,12 @@ package com.tssssa.sgaheer.groupify;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,17 +26,20 @@ import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
     private Firebase mFirebaseRef;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
     private Toolbar homeToolbar;
     private TextView intro;
-    private ListView homeEvents;
     private Toast toast;
     private CharSequence toastText;
     private Context context;
-    private ArrayList<String> eventList = new ArrayList<String>();
+    private ArrayList<GEvents> eventList = new ArrayList<GEvents>();
     private ArrayAdapter<String> eventAdapter;
     private String usr;
+
+    private static String LOG_TAG = "CardView Activity";
     public final static String LOGOUT_MESSAGE = "com.tssssa.groupify.LOGOUT";
-    public static final int NUM_ITEMS = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +55,16 @@ public class HomeActivity extends AppCompatActivity {
         homeToolbar = (Toolbar) findViewById(R.id.home_toolbar);
         setSupportActionBar(homeToolbar);
 
-        homeEvents = (ListView) findViewById(R.id.home_listview_events);
-        homeEvents.setBackgroundColor(getResources().getColor(R.color.ghostWhite));
-        homeEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                toast.makeText(getApplicationContext(), "List Number " + position, Toast.LENGTH_SHORT).show();
-            }
-        });
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        GEvents redundant = new GEvents("Create an Event", "Enter a Value", "Enter a Value", "Test Attendees");
+        eventList.add(redundant);
+        mAdapter = new MyRecyclerViewAdapter(eventList);
+        mRecyclerView.setAdapter(mAdapter);
+        createList();
 
         Firebase evRef = new Firebase("https://dazzling-heat-7399.firebaseio.com/events");
         evRef.addValueEventListener(new ValueEventListener() {
@@ -101,6 +108,18 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ((MyRecyclerViewAdapter) mAdapter).setOnItemClickListener(new MyRecyclerViewAdapter
+                .MyClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                Log.i(LOG_TAG, "Clcked on Item" + position);
+            }
+        });
+    }
+
     protected void onNewIntent(Intent intent) {
             super.onNewIntent(intent);
             String message = intent.getStringExtra(CEventActivity.CREATE_MESSAGE);
@@ -141,9 +160,12 @@ public class HomeActivity extends AppCompatActivity {
         finish();
     }
 
-    private void updateEventList(ArrayList<String> arList) {
-        eventAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arList);
-        homeEvents.setAdapter(eventAdapter);
+    private void updateEventList(ArrayList<GEvents> arList) {
+        int fillTest = arList.size();
+        if (fillTest != 0) {
+            mAdapter = new MyRecyclerViewAdapter(arList);
+            mRecyclerView.setAdapter(mAdapter);
+        }
     }
 
     private void createList() {
@@ -166,8 +188,12 @@ public class HomeActivity extends AppCompatActivity {
                     eventsRef.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            String key = dataSnapshot.child("name").getValue().toString();
-                            eventList.add(key);
+                            String name = dataSnapshot.child("name").getValue().toString();
+                            String desc = dataSnapshot.child("description").getValue().toString();
+                            String loc = dataSnapshot.child("location").getValue().toString();
+                            String idd = dataSnapshot.child("id").getValue().toString();
+                            GEvents ev = new GEvents(name, loc, desc, "attendees");
+                            eventList.add(ev);
                             updateEventList(eventList);
                         }
                         @Override

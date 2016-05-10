@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -15,35 +15,35 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:elevation="5dp"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        />
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textAlignment="center"
         android:id="@+id/home_textView"
-        android:elevation="3dp"
-        android:layout_gravity="center_horizontal" />
-
-    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Current Events:"
-        android:background="@color/colorPrimaryDarker"
-        android:textColor="@color/ghostWhite"
+        android:layout_gravity="center_horizontal"
+        android:elevation="3dp"
+        android:textAlignment="center"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
         android:id="@+id/home_constantTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/colorPrimaryDarker"
         android:elevation="2dp"
         android:paddingLeft="10dp"
-        android:layout_gravity="center_horizontal" />
+        android:text="Current Events:"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/ghostWhite" />
 
-    <ListView
-        android:id="@+id/home_listview_events"
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/my_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:elevation="1dp">
-    </ListView>
+        android:scrollbars="vertical" />
+
 </LinearLayout>

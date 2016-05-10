@@ -34,11 +34,12 @@
         <activity
             android:name=".CGroupActivity"
             android:label="@string/action_cgroup"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".CEventActivity"
+            android:label="@string/action_cevent"
             android:parentActivityName=".HomeActivity"></activity>
-        <activity android:name=".CEventActivity"
-            android:parentActivityName=".HomeActivity"
-            android:label="@string/action_cevent">
-        </activity>
+        <activity android:name=".CardActivity"></activity>
     </application>
 
 </manifest>
