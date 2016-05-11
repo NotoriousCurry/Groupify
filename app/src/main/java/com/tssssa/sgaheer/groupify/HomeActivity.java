@@ -11,9 +11,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +32,6 @@ public class HomeActivity extends AppCompatActivity {
     private CharSequence toastText;
     private Context context;
     private ArrayList<GEvents> eventList = new ArrayList<GEvents>();
-    private ArrayAdapter<String> eventAdapter;
     private String usr;
 
     private static String LOG_TAG = "CardView Activity";
@@ -70,6 +66,7 @@ public class HomeActivity extends AppCompatActivity {
         evRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                eventList.clear();
                 createList();
             }
 
