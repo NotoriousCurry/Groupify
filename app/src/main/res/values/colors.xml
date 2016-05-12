@@ -5,4 +5,5 @@
     <color name="colorPrimaryDarker">#2a378b</color>
     <color name="colorAccent">#FF4081</color>
     <color name="ghostWhite">#F8F8FF</color>
+    <color name="ghostSilver">#c6c6cc</color>
 </resources>
