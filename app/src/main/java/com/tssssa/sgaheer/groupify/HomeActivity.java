@@ -19,6 +19,8 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
+import com.firebase.client.snapshot.BooleanNode;
+
 import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
@@ -175,31 +177,34 @@ public class HomeActivity extends AppCompatActivity {
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                String num = snapshot.getValue().toString();
-                eventList.clear();
-                toastText = num;
-                for(DataSnapshot postSnapshot: snapshot.getChildren()) {
-                    String key = postSnapshot.getKey().toString();
-                    String test = postSnapshot.getValue().toString();
-                    toastText = test;
-                    toast.makeText(context, toastText, Toast.LENGTH_SHORT);
-                    eventsRef.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            String name = dataSnapshot.child("name").getValue().toString();
-                            String desc = dataSnapshot.child("description").getValue().toString();
-                            String loc = dataSnapshot.child("location").getValue().toString();
-                            String idd = dataSnapshot.child("id").getValue().toString();
-                            GEvents ev = new GEvents(name, loc, desc, "attendees", idd);
-                            eventList.add(ev);
-                            updateEventList(eventList);
-                        }
-                        @Override
-                        public void onCancelled(FirebaseError firebaseError) {
-                            toastText = firebaseError.toString();
-                            toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                Boolean exists = snapshot.hasChildren();
+                if(exists == true) {
+                    String num = snapshot.getValue().toString();
+                    eventList.clear();
+                    toastText = num;
+                    for(DataSnapshot postSnapshot: snapshot.getChildren()) {
+                        String key = postSnapshot.getKey().toString();
+                        String test = postSnapshot.getValue().toString();
+                        toastText = test;
+                        toast.makeText(context, toastText, Toast.LENGTH_SHORT);
+                        eventsRef.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                String name = dataSnapshot.child("name").getValue().toString();
+                                String desc = dataSnapshot.child("description").getValue().toString();
+                                String loc = dataSnapshot.child("location").getValue().toString();
+                                String idd = dataSnapshot.child("id").getValue().toString();
+                                GEvents ev = new GEvents(name, loc, desc, "attendees", idd);
+                                eventList.add(ev);
+                                updateEventList(eventList);
+                            }
+                            @Override
+                            public void onCancelled(FirebaseError firebaseError) {
+                                toastText = firebaseError.toString();
+                                toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
                 }
             }
 

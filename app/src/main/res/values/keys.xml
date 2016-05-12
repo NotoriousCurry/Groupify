@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="firebase_url">https://dazzling-heat-7399.firebaseio.com</string>
+    <string name="firebaseevent_url">https://dazzling-heat-7399.firebaseio.com/events</string>
+    <string name="firebaseuser_url">https://dazzling-heat-7399.firebaseio.com/users</string>
 </resources>

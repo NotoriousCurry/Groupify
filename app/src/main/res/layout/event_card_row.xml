@@ -13,6 +13,7 @@
         android:layout_margin="5dp"
         card_view:cardCornerRadius="2dp"
         card_view:contentPadding="10dp"
+        card_view:cardBackgroundColor="@color/ghostWhite"
         android:elevation="3dp">
 
         <LinearLayout

@@ -127,7 +127,7 @@ public class CEventActivity extends AppCompatActivity {
         addIdRef.updateChildren(eid);
 
         Firebase memberPath = new Firebase("https://dazzling-heat-7399.firebaseio.com/events/"+postID).child("members");
-        attendees.put(userID, "true");
+        attendees.put(userID, userID);
         memberPath.updateChildren(attendees, new Firebase.CompletionListener() {
             @Override
             public void onComplete(FirebaseError firebaseError, Firebase firebase) {

@@ -23,6 +23,7 @@
 
     <string name="login_with_password">Sign In</string>
     <string name="action_signup">Sign Up</string>
+    <string name="action_join">Join Event</string>
 
     <string name="home_events">Events</string>
     <string name="home_invitations">Invitations</string>

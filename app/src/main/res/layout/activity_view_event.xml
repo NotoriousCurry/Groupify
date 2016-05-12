@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.tssssa.sgaheer.groupify.ViewEvent">
@@ -12,35 +12,102 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        />
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <ScrollView
+    <RelativeLayout
         android:id="@+id/vevent_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/vevent_toolbar">
 
         <LinearLayout
             android:id="@+id/view_event_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <android.support.design.widget.TextInputLayout
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:elevation="3dp"
+                android:src="@mipmap/ic_eventimage" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="65dp">
+                android:orientation="vertical">
 
-                <AutoCompleteTextView
+                <TextView
                     android:id="@+id/view_event_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:elevation="3dp"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:paddingLeft="10dp"
+                    android:singleLine="true"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            </android.support.design.widget.TextInputLayout>
+                <TextView
+                    android:id="@+id/view_event_loc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:paddingLeft="10dp"
+                    android:singleLine="true"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:elevation="3dp"/>
 
+
+            </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/view_event_form2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/view_event_form"
+            android:paddingLeft="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Description:"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:elevation="3dp"/>
+
+                <TextView
+                    android:id="@+id/view_event_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:maxLines="1"
+                    android:elevation="3dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Members:"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:elevation="3dp"
+                android:paddingTop="15dp"/>
+
+            <ListView
+                android:id="@+id/vevent_members"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </ListView>
+
+            <Button
+                android:id="@+id/action_join_event"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/action_join"
+                android:layout_gravity="center"
+                android:elevation="2dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:visibility="gone"/>
+        </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>
