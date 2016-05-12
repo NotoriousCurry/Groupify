@@ -1,5 +1,8 @@
 package com.tssssa.sgaheer.groupify;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,18 +20,22 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private static String LOG_TAG = "MyRecyclerViewAdapter";
     private ArrayList<GEvents> mDataSet;
     private static MyClickListener myClickListener;
+    private static Context mContext;
+    public final static String EXTRA_ID = "com.tssssa.groupify.ID";
 
     public static class GEventsHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
         TextView name;
         TextView description;
         TextView location;
+        TextView eId;
 
         public GEventsHolder(View vv) {
             super(vv);
             name = (TextView) vv.findViewById(R.id.ecvText1);
             description = (TextView) vv.findViewById(R.id.ecvText2);
             location = (TextView) vv.findViewById(R.id.ecvText3);
+            eId = (TextView) vv.findViewById(R.id.ecvText4);
             Log.i(LOG_TAG, "Adding Listener");
             vv.setOnClickListener(this);
         }
@@ -43,8 +50,9 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         this.myClickListener = myClickListener;
     }
 
-    public MyRecyclerViewAdapter(ArrayList<GEvents> myDataset) {
+    public MyRecyclerViewAdapter(ArrayList<GEvents> myDataset, Context mContext) {
         this.mDataSet = myDataset;
+        this.mContext = mContext;
     }
 
     @Override
@@ -57,9 +65,29 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     @Override
     public void onBindViewHolder(GEventsHolder holder, int position) {
+        holder.itemView.setTag(position);
         holder.name.setText(mDataSet.get(position).getName());
         holder.description.setText("Description: " + mDataSet.get(position).getDescription());
         holder.location.setText("Location: " + mDataSet.get(position).getLocation());
+        holder.eId.setText(mDataSet.get(position).getId());
+        final String namess = holder.name.getText().toString();
+        final String descriptions = holder.description.getText().toString();
+        final String locations = holder.location.getText().toString();
+        final String eventId = holder.eId.getText().toString();
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println(namess);
+                System.out.println(descriptions);
+                System.out.println(locations);
+                System.out.println(eventId);
+                Intent intent = new Intent(mContext, ViewEvent.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra(EXTRA_ID, eventId);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     public void addItem(GEvents eve) {
@@ -69,6 +97,10 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     public void deleteItem(int index) {
         mDataSet.remove(index);
         notifyItemRemoved(index);
+    }
+
+    public String getEid(int index) {
+        return mDataSet.get(index).getId();
     }
 
     @Override

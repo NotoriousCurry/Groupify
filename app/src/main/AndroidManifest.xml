@@ -38,8 +38,10 @@
         <activity
             android:name=".CEventActivity"
             android:label="@string/action_cevent"
+            android:parentActivityName=".HomeActivity" />
+        <activity android:name=".CardActivity" />
+        <activity android:name=".ViewEvent"
             android:parentActivityName=".HomeActivity"></activity>
-        <activity android:name=".CardActivity"></activity>
     </application>
 
 </manifest>

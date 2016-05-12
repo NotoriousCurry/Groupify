@@ -16,12 +16,12 @@ public class GEvents {
 
    }
 
-    public GEvents(String eName, String eLocation, String eDescription, String eAttendees) {
+    public GEvents(String eName, String eLocation, String eDescription, String eAttendees, String id) {
         this.name = eName;
         this.location = eLocation;
         this.description = eDescription;
         this.members = eAttendees;
-        this.id = "";
+        this.id = id;
     }
 
     public String getName() {
@@ -36,6 +36,10 @@ public class GEvents {
         return description;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public String getMembers() {
         return members;
     }
@@ -43,12 +47,4 @@ public class GEvents {
     public void setMembers(String eAttendees) {
         this.members = eAttendees;
     }
-
-  //  public void addeAttendees(String eMember) {
-    //    members.add(eMember);
-   // }
-
-   // public void removeeAttendees(String eMember) {
-   //     members.remove(eMember);
-   // }
 }

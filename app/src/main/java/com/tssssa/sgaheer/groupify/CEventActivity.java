@@ -92,7 +92,7 @@ public class CEventActivity extends AppCompatActivity {
             toastText = "Creating Group";
             eAttendees = new ArrayList<String>();
             toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
-            GEvents ev = new GEvents(eName, eLocation, eDescription, "");
+            GEvents ev = new GEvents(eName, eLocation, eDescription, "Attendees", "N/A");
             createGEvent(ev);
         }
     }

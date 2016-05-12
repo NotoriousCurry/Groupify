@@ -43,15 +43,15 @@ public class CardActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        GEvents redundant = new GEvents("Test Name", "Test Loc", "Test Desc", "Test Attendees");
+        GEvents redundant = new GEvents("Test Name", "Test Loc", "Test Desc", "Test Attendees", "N/A");
         eventList.add(redundant);
-        mAdapter = new MyRecyclerViewAdapter(eventList);
+        mAdapter = new MyRecyclerViewAdapter(eventList, context);
         mRecyclerView.setAdapter(mAdapter);
         getDataSet();
     }
 
     protected void updateList(ArrayList<GEvents> mDataSet) {
-        mAdapter = new MyRecyclerViewAdapter(mDataSet);
+        mAdapter = new MyRecyclerViewAdapter(mDataSet, context);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -90,7 +90,7 @@ public class CardActivity extends AppCompatActivity {
                             String name = dataSnapshot.child("name").getValue().toString();
                             String desc = dataSnapshot.child("description").getValue().toString();
 
-                            GEvents ev = new GEvents(name, "Loc", desc, "att");
+                            GEvents ev = new GEvents(name, "Loc", desc, "att", "N/A");
                             eventList.add(ev);
                             System.out.println(ev.getName());
                             System.out.println(ev.getDescription());
@@ -116,8 +116,8 @@ public class CardActivity extends AppCompatActivity {
     private ArrayList<GEvents> testSet() {
         ArrayList results = new ArrayList<GEvents>();
         for (int index = 0; index < 20; index++) {
-            GEvents obj = new GEvents("Some Primary Text ", "a",
-                    "Secondary ", "c");
+            GEvents obj = new GEvents("a", "b",
+                    "c", "d", "e");
             results.add(index, obj);
         }
         return results;

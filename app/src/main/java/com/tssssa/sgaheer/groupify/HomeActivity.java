@@ -30,7 +30,7 @@ public class HomeActivity extends AppCompatActivity {
     private TextView intro;
     private Toast toast;
     private CharSequence toastText;
-    private Context context;
+    private Context context = this;
     private ArrayList<GEvents> eventList = new ArrayList<GEvents>();
     private String usr;
 
@@ -56,9 +56,9 @@ public class HomeActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        GEvents redundant = new GEvents("Create an Event", "Enter a Value", "Enter a Value", "Test Attendees");
+        GEvents redundant = new GEvents("Create an Event", "Enter a Value", "Enter a Value", "Test Attendees", "N/A");
         eventList.add(redundant);
-        mAdapter = new MyRecyclerViewAdapter(eventList);
+        mAdapter = new MyRecyclerViewAdapter(eventList, context);
         mRecyclerView.setAdapter(mAdapter);
         createList();
 
@@ -157,10 +157,11 @@ public class HomeActivity extends AppCompatActivity {
         finish();
     }
 
+
     private void updateEventList(ArrayList<GEvents> arList) {
         int fillTest = arList.size();
         if (fillTest != 0) {
-            mAdapter = new MyRecyclerViewAdapter(arList);
+            mAdapter = new MyRecyclerViewAdapter(arList, context);
             mRecyclerView.setAdapter(mAdapter);
         }
     }
@@ -189,7 +190,7 @@ public class HomeActivity extends AppCompatActivity {
                             String desc = dataSnapshot.child("description").getValue().toString();
                             String loc = dataSnapshot.child("location").getValue().toString();
                             String idd = dataSnapshot.child("id").getValue().toString();
-                            GEvents ev = new GEvents(name, loc, desc, "attendees");
+                            GEvents ev = new GEvents(name, loc, desc, "attendees", idd);
                             eventList.add(ev);
                             updateEventList(eventList);
                         }
