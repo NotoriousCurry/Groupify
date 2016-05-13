@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
     private Firebase mFirebaseRef;
-    private RecyclerView mRecyclerView;
+    private MyRecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private Toolbar homeToolbar;
@@ -80,7 +80,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        mRecyclerView = (MyRecyclerView) findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
