@@ -3,6 +3,8 @@ package com.tssssa.sgaheer.groupify;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,6 +32,9 @@ public class HomeActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private Toolbar homeToolbar;
     private TextView intro;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private FloatingActionButton mFab;
+
     private Toast toast;
     private CharSequence toastText;
     private Context context = this;
@@ -44,6 +49,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         mFirebaseRef = new Firebase(getResources().getString(R.string.firebase_url));
+        context = getApplicationContext();
 
         intro = (TextView) findViewById(R.id.home_textView);
         intro.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
@@ -52,6 +58,27 @@ public class HomeActivity extends AppCompatActivity {
 
         homeToolbar = (Toolbar) findViewById(R.id.home_toolbar);
         setSupportActionBar(homeToolbar);
+
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshHome);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                createList();
+            }
+        });
+        mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+        mFab = (FloatingActionButton) findViewById(R.id.home_fab);
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToCevents = new Intent(context, CEventActivity.class);
+                startActivity(goToCevents);
+            }
+        });
 
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -93,14 +120,13 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.action_logout:
                 logout();
                 return true;
-            case R.id.refresh_page:
-                toastText = "Refreshing";
+            case R.id.view_account:
+                toastText = "Go To View Account";
                 toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
-                createList();
                 return true;
-            case R.id.create_group:
-                Intent goToCevents = new Intent(this, CEventActivity.class);
-                startActivity(goToCevents);
+            case R.id.get_help:
+                toastText = "Go To Help";
+                toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -166,6 +192,7 @@ public class HomeActivity extends AppCompatActivity {
             mAdapter = new MyRecyclerViewAdapter(arList, context);
             mRecyclerView.setAdapter(mAdapter);
         }
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
     private void createList() {

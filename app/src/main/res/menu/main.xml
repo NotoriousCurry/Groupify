@@ -4,15 +4,15 @@
     tools:context="com.tssssa.sgaheer.groupify.LoginActivity">
 
     <item
-        android:id="@+id/create_group"
-        android:icon="@drawable/ic_create_white_48dp"
-        android:title="@string/action_refresh"
+        android:id="@+id/view_account"
+        android:icon="@drawable/ic_account_circle_white_48dp"
+        android:title="@string/action_view_account"
         app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/refresh_page"
-        android:icon="@drawable/ic_refresh_white_48dp"
-        android:title="@string/action_cgroup"
+        android:id="@+id/get_help"
+        android:icon="@drawable/ic_help_white_48dp"
+        android:title="@string/action_help"
         app:showAsAction="ifRoom"/>
 
     <item
