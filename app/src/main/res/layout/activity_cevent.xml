@@ -82,6 +82,24 @@
             </android.support.design.widget.TextInputLayout>
 
             <Button
+                android:id="@+id/cevent_dateButton"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:text="Choose Date"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/cevent_timeButton"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:text="Choose Time"
+                android:textStyle="bold" />
+
+            <Button
                 android:id="@+id/cevent_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="100dp"

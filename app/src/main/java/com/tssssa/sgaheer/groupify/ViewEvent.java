@@ -28,6 +28,8 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +44,7 @@ public class ViewEvent extends AppCompatActivity {
     private TextView veName;
     private TextView veDesc;
     private TextView veLoc;
+    private TextView veDate;
     private ListView eventMembers;
     private ImageButton jEvent;
     private Animator mCurrentAnimator;
@@ -62,6 +65,7 @@ public class ViewEvent extends AppCompatActivity {
         veName = (TextView) findViewById(R.id.view_event_name);
         veDesc = (TextView) findViewById(R.id.view_event_desc);
         veLoc = (TextView) findViewById(R.id.view_event_loc);
+        veDate = (TextView) findViewById(R.id.view_event_date);
         eventMembers = (ListView) findViewById(R.id.vevent_members);
         eventMembers.setBackgroundColor(getResources().getColor(R.color.ghostWhite));
 
@@ -122,9 +126,12 @@ public class ViewEvent extends AppCompatActivity {
                 String name = snapshot.child("name").getValue().toString();
                 String desc = snapshot.child("description").getValue().toString();
                 String loc = snapshot.child("location").getValue().toString();
-                veName.setText("Name: " + name);
+                String date = snapshot.child("date").getValue().toString();
+                date = date + " - " + snapshot.child("time").getValue().toString();
+                veName.setText(name);
                 veDesc.setText(desc);
                 veLoc.setText("Location: " + loc);
+                veDate.setText(date);
                 }
             @Override
             public void onCancelled(FirebaseError firebaseError) {

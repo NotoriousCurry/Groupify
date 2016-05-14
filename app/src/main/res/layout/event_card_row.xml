@@ -12,7 +12,7 @@
         android:layout_gravity="center"
         android:layout_margin="5dp"
         card_view:cardCornerRadius="2dp"
-        card_view:contentPadding="10dp"
+        card_view:contentPadding="8dp"
         card_view:cardBackgroundColor="@color/ghostWhite"
         android:elevation="3dp">
 
@@ -37,28 +37,41 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:maxLines="1"/>
+
+                <TextView
+                    android:id="@+id/ecvText5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ecvText1"
+                    android:layout_marginTop="7dp"
+                    android:textStyle="italic"
+                    android:maxLines="1"/>
 
                 <TextView
                     android:id="@+id/ecvText2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/ecvText1"
-                    android:layout_marginTop="10dp" />
+                    android:layout_below="@+id/ecvText5"
+                    android:layout_marginTop="7dp"
+                    android:maxLines="1"/>
 
                 <TextView
                     android:id="@+id/ecvText3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/ecvText2"
-                    android:layout_marginTop="10dp" />
+                    android:layout_marginTop="7dp"
+                    android:maxLines="1"/>
 
                 <TextView
                     android:id="@+id/ecvText4"
                     android:layout_width="1dp"
                     android:layout_height="1dp"
                     android:layout_below="@+id/ecvText3"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:maxLines="1"/>
 
             </RelativeLayout>
         </LinearLayout>

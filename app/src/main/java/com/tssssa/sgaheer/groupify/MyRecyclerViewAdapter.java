@@ -29,6 +29,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         TextView description;
         TextView location;
         TextView eId;
+        TextView eDate;
 
         public GEventsHolder(View vv) {
             super(vv);
@@ -36,6 +37,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             description = (TextView) vv.findViewById(R.id.ecvText2);
             location = (TextView) vv.findViewById(R.id.ecvText3);
             eId = (TextView) vv.findViewById(R.id.ecvText4);
+            eDate = (TextView) vv.findViewById(R.id.ecvText5);
             Log.i(LOG_TAG, "Adding Listener");
             vv.setOnClickListener(this);
         }
@@ -70,18 +72,15 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         holder.description.setText("Description: " + mDataSet.get(position).getDescription());
         holder.location.setText("Location: " + mDataSet.get(position).getLocation());
         holder.eId.setText(mDataSet.get(position).getId());
-        final String namess = holder.name.getText().toString();
-        final String descriptions = holder.description.getText().toString();
-        final String locations = holder.location.getText().toString();
+        holder.eDate.setText(mDataSet.get(position).getDate() + " - " + mDataSet.get(position).getTime());
+        //final String namess = holder.name.getText().toString();
+        //final String descriptions = holder.description.getText().toString();
+        //final String locations = holder.location.getText().toString();
         final String eventId = holder.eId.getText().toString();
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(namess);
-                System.out.println(descriptions);
-                System.out.println(locations);
-                System.out.println(eventId);
                 Intent intent = new Intent(mContext, ViewEvent.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(EXTRA_ID, eventId);

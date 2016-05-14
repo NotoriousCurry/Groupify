@@ -43,7 +43,7 @@ public class CardActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        GEvents redundant = new GEvents("Test Name", "Test Loc", "Test Desc", "Test Attendees", "N/A");
+        GEvents redundant = new GEvents("Test Name", "Test Loc", "Test Desc", "N/A", "Test Date", "Test Time");
         eventList.add(redundant);
         mAdapter = new MyRecyclerViewAdapter(eventList, context);
         mRecyclerView.setAdapter(mAdapter);
@@ -90,7 +90,7 @@ public class CardActivity extends AppCompatActivity {
                             String name = dataSnapshot.child("name").getValue().toString();
                             String desc = dataSnapshot.child("description").getValue().toString();
 
-                            GEvents ev = new GEvents(name, "Loc", desc, "att", "N/A");
+                            GEvents ev = new GEvents(name, "Loc", desc, "N/A", "Date", "Time");
                             eventList.add(ev);
                             System.out.println(ev.getName());
                             System.out.println(ev.getDescription());
@@ -117,7 +117,7 @@ public class CardActivity extends AppCompatActivity {
         ArrayList results = new ArrayList<GEvents>();
         for (int index = 0; index < 20; index++) {
             GEvents obj = new GEvents("a", "b",
-                    "c", "d", "e");
+                    "c", "d", "e", "f");
             results.add(index, obj);
         }
         return results;

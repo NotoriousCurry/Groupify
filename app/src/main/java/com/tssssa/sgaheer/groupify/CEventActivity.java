@@ -1,6 +1,9 @@
 package com.tssssa.sgaheer.groupify;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
@@ -10,13 +13,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,14 +38,18 @@ public class CEventActivity extends AppCompatActivity {
     private TextView ceDescription;
     private TextView ceLocation;
     private Button ceCreate;
+    private Button ceDate;
+    private Button ceTime;
 
     private CharSequence toastText;
     private String eName;
     private String eDescription;
     private String eLocation;
+    private String dates = "";
+    private String times = "";
     private ArrayList<String> eAttendees;
     private String[] sArray;
-
+    private int year, month, day, hour, minute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +62,27 @@ public class CEventActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         mFirebaseRef = new Firebase(getResources().getString(R.string.firebase_url));
+
         ceName = (TextView) findViewById(R.id.create_event_name);
         ceDescription = (TextView) findViewById(R.id.create_event_description);
         ceLocation = (TextView) findViewById(R.id.create_event_location);
         ceCreate = (Button) findViewById(R.id.cevent_button);
+        ceDate = (Button) findViewById(R.id.cevent_dateButton);
+        ceTime = (Button) findViewById(R.id.cevent_timeButton);
+
+        ceDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setDate(v);
+            }
+        });
+
+        ceTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setTime(v);
+            }
+        });
 
         ceCreate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +93,7 @@ public class CEventActivity extends AppCompatActivity {
                 checkGEvent(eName, eDescription, eLocation);
             }
         });
+
     }
 
     @Override
@@ -74,7 +102,42 @@ public class CEventActivity extends AppCompatActivity {
         return true;
     }
 
+    private void setDate(View v) {
+        final Calendar c = Calendar.getInstance();
+        year = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        day = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog dPG = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                dates = Integer.toString(year) + "/" + Integer.toString(monthOfYear)
+                        + "/" + Integer.toString(dayOfMonth);
+            }
+        }, year, month, day);
+        dPG.show();
+    }
+
+    private void setTime(View v) {
+        final Calendar c = Calendar.getInstance();
+        hour = c.get(Calendar.HOUR_OF_DAY);
+        minute = c.get(Calendar.MINUTE);
+
+        TimePickerDialog tpG = new TimePickerDialog(this,
+                new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        times = Integer.toString(hourOfDay) + ":" + Integer.toString(minute);
+                    }
+                }, hour, minute, false);
+        tpG.show();
+    }
+
     private void checkGEvent(String eName, String eDescription, String eLocation) {
+        System.out.println(dates + " " + times);
+        boolean tCheck = times.equals("");
+        boolean daCheck = dates.equals("");
         boolean ncheck = eName.equals("");
         boolean dcheck = eDescription.equals("");
         boolean lCheck = eLocation.equals("");
@@ -88,11 +151,17 @@ public class CEventActivity extends AppCompatActivity {
         } else if (lCheck == true) {
             toastText = "Enter a Location";
             toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
+        } else if (daCheck == true){
+            toastText = "Choose a Date";
+            toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
+        } else if (tCheck == true) {
+            toastText = "Choose a Time";
+            toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
         } else {
             toastText = "Creating Group";
             eAttendees = new ArrayList<String>();
             toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
-            GEvents ev = new GEvents(eName, eLocation, eDescription, "Attendees", "N/A");
+            GEvents ev = new GEvents(eName, eLocation, eDescription, "N/A", dates, times);
             createGEvent(ev);
         }
     }
@@ -109,6 +178,8 @@ public class CEventActivity extends AppCompatActivity {
         eventDetails.put("name", ev.getName());
         eventDetails.put("description", ev.getDescription());
         eventDetails.put("location", ev.getLocation());
+        eventDetails.put("date", ev.getDate());
+        eventDetails.put("time", ev.getTime());
         newPostRef.setValue(eventDetails, new Firebase.CompletionListener() {
             @Override
             public void onComplete(FirebaseError firebaseError, Firebase firebase) {

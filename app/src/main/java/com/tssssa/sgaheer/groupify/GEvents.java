@@ -9,19 +9,21 @@ public class GEvents {
     private String name;
     private String location;
     private String description;
-    private String members;
     private String id;
+    private String date;
+    private String time;
 
    public GEvents() {
 
    }
 
-    public GEvents(String eName, String eLocation, String eDescription, String eAttendees, String id) {
+    public GEvents(String eName, String eLocation, String eDescription, String id, String date, String time) {
         this.name = eName;
         this.location = eLocation;
         this.description = eDescription;
-        this.members = eAttendees;
         this.id = id;
+        this.date = date;
+        this.time = time;
     }
 
     public String getName() {
@@ -40,11 +42,11 @@ public class GEvents {
         return id;
     }
 
-    public String getMembers() {
-        return members;
+    public String getDate() {
+        return date;
     }
 
-    public void setMembers(String eAttendees) {
-        this.members = eAttendees;
+    public String getTime() {
+        return time;
     }
 }

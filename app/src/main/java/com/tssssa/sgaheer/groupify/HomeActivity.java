@@ -21,7 +21,6 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
-import com.firebase.client.snapshot.BooleanNode;
 
 import java.util.ArrayList;
 
@@ -85,7 +84,7 @@ public class HomeActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        GEvents redundant = new GEvents("Create an Event", "Enter a Value", "Enter a Value", "Test Attendees", "N/A");
+        GEvents redundant = new GEvents("Create an Event", "Enter a Description", "Enter a Location", "N/A", "Enter a Date", "Enter Time");
         eventList.add(redundant);
         mAdapter = new MyRecyclerViewAdapter(eventList, context);
         mRecyclerView.setAdapter(mAdapter);
@@ -221,7 +220,9 @@ public class HomeActivity extends AppCompatActivity {
                                 String desc = dataSnapshot.child("description").getValue().toString();
                                 String loc = dataSnapshot.child("location").getValue().toString();
                                 String idd = dataSnapshot.child("id").getValue().toString();
-                                GEvents ev = new GEvents(name, loc, desc, "attendees", idd);
+                                String dat = dataSnapshot.child("date").getValue().toString();
+                                String tim = dataSnapshot.child("time").getValue().toString();
+                                GEvents ev = new GEvents(name, loc, desc, idd, dat, tim);
                                 eventList.add(ev);
                                 updateEventList(eventList);
                             }
