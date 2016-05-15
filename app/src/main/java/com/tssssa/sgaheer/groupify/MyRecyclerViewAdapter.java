@@ -73,9 +73,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         holder.location.setText("Location: " + mDataSet.get(position).getLocation());
         holder.eId.setText(mDataSet.get(position).getId());
         holder.eDate.setText(mDataSet.get(position).getDate() + " - " + mDataSet.get(position).getTime());
-        //final String namess = holder.name.getText().toString();
-        //final String descriptions = holder.description.getText().toString();
-        //final String locations = holder.location.getText().toString();
         final String eventId = holder.eId.getText().toString();
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +93,10 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     public void deleteItem(int index) {
         mDataSet.remove(index);
         notifyItemRemoved(index);
+    }
+
+    public boolean checkExist(GEvents ev) {
+       return mDataSet.contains(ev);
     }
 
     public String getEid(int index) {

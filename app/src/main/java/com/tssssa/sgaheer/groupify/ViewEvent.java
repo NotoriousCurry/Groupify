@@ -15,7 +15,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -28,11 +27,9 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
 
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ViewEvent extends AppCompatActivity {
@@ -78,6 +75,7 @@ public class ViewEvent extends AppCompatActivity {
 
         Intent intent = getIntent();
         final String eid = intent.getStringExtra(MyRecyclerViewAdapter.EXTRA_ID);
+        // Add code to get extra from notificationService
         Firebase evRef = new Firebase(getResources().getString(R.string.firebaseevent_url)).child(eid);
 
 

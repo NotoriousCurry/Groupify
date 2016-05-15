@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.tssssa.sgaheer.groupify.CEventActivity">
 
     <android.support.v7.widget.Toolbar
@@ -15,23 +15,22 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        />
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="160dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/wallpaperpurple"/>
+        android:src="@drawable/wallpaperpurple" />
 
     <ScrollView
         android:id="@+id/cevent_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="10dp"
         android:paddingLeft="6dp"
-        android:paddingRight="6dp">
+        android:paddingRight="6dp"
+        android:paddingTop="10dp">
 
         <LinearLayout
             android:id="@+id/create_event_form"
@@ -81,23 +80,27 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <Button
-                android:id="@+id/cevent_dateButton"
-                style="?android:textAppearanceSmall"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
                 android:layout_gravity="center"
-                android:text="Choose Date"
-                android:textStyle="bold" />
+                android:gravity="center">
 
-            <Button
-                android:id="@+id/cevent_timeButton"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:text="Choose Time"
-                android:textStyle="bold" />
+                <ImageButton
+                    android:id="@+id/cevent_dateButton"
+                    android:src="@drawable/ic_event_48dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"/>
+
+                <ImageButton
+                    android:id="@+id/cevent_timeButton"
+                    android:src="@drawable/ic_time_48dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
 
             <Button
                 android:id="@+id/cevent_button"

@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -38,8 +40,8 @@ public class CEventActivity extends AppCompatActivity {
     private TextView ceDescription;
     private TextView ceLocation;
     private Button ceCreate;
-    private Button ceDate;
-    private Button ceTime;
+    private ImageButton ceDate;
+    private ImageButton ceTime;
 
     private CharSequence toastText;
     private String eName;
@@ -67,8 +69,8 @@ public class CEventActivity extends AppCompatActivity {
         ceDescription = (TextView) findViewById(R.id.create_event_description);
         ceLocation = (TextView) findViewById(R.id.create_event_location);
         ceCreate = (Button) findViewById(R.id.cevent_button);
-        ceDate = (Button) findViewById(R.id.cevent_dateButton);
-        ceTime = (Button) findViewById(R.id.cevent_timeButton);
+        ceDate = (ImageButton) findViewById(R.id.cevent_dateButton);
+        ceTime = (ImageButton) findViewById(R.id.cevent_timeButton);
 
         ceDate.setOnClickListener(new View.OnClickListener() {
             @Override

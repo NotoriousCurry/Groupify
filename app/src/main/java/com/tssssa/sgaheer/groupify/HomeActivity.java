@@ -42,6 +42,9 @@ public class HomeActivity extends AppCompatActivity {
 
     private static String LOG_TAG = "CardView Activity";
     public final static String LOGOUT_MESSAGE = "com.tssssa.groupify.LOGOUT";
+    public final static String EXTRA_ID = "com.tssssa.groupify.ID";
+    public final static String EXTRA_NAME = "com.tssssa.groupify.NAME";
+    public final static String Extra_DESC = "com.tssssa.groupify.DESC";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +93,11 @@ public class HomeActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
         createList();
 
+        // Add in notification stuff for background task
+        //final Intent serviceIntent = new Intent(this, NotificationService.class);
+        //Firebase notiRef = new Firebase("https://dazzling-heat-7399.firebaseio.com/events");
+
+
         Firebase evRef = new Firebase("https://dazzling-heat-7399.firebaseio.com/events");
         evRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -120,8 +128,8 @@ public class HomeActivity extends AppCompatActivity {
                 logout();
                 return true;
             case R.id.view_account:
-                toastText = "Go To View Account";
-                toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
+                Intent goToViewAcct = new Intent(this, ViewUser.class);
+                startActivity(goToViewAcct);
                 return true;
             case R.id.get_help:
                 toastText = "Go To Help";
