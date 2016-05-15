@@ -114,8 +114,9 @@ public class CEventActivity extends AppCompatActivity {
                 new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                dates = Integer.toString(year) + "/" + Integer.toString(monthOfYear)
-                        + "/" + Integer.toString(dayOfMonth);
+                monthOfYear = monthOfYear + 1;
+                dates = Integer.toString(dayOfMonth) + "/" + Integer.toString(monthOfYear)
+                        + "/" + Integer.toString(year);
             }
         }, year, month, day);
         dPG.show();
