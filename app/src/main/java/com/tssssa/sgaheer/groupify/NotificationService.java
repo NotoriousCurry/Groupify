@@ -9,7 +9,9 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
 /**
- * Meant to be used to issue notifications for the application, Have to finish implementation
+ * created by sgaheer on 14/05/16
+ * This is a background task that is meant to handle notifcations
+ * Implementation is current INCOMPLETE in HomeActivity
  */
 public class NotificationService extends IntentService {
     public final static String EXTRA_ID = "com.tssssa.groupify.ID";

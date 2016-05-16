@@ -9,6 +9,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.firebase.client.Firebase;
+/**
+ * Created by sgaheer on 01/05/2016.
+ * This class is meant to handle the creation of groups, however has not been implemented yet
+ */
 
 public class CGroupActivity extends AppCompatActivity {
     private Toolbar cgroupToolbar;

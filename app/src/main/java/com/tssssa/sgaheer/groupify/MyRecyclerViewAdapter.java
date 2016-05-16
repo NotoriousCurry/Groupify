@@ -14,6 +14,8 @@ import java.util.ArrayList;
 
 /**
  * Created by sgaheer on 10/05/2016.
+ * This constructor is used to handle the creation of the CardView on the homepage
+ * Also contains code to handle user input & change pages
  */
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter
         .GEventsHolder> {

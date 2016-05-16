@@ -5,7 +5,8 @@
     android:id="@+id/event_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.tssssa.sgaheer.groupify.ViewEvent">
+    tools:context="com.tssssa.sgaheer.groupify.ViewEvent"
+    android:descendantFocusability="blocksDescendants">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/vevent_toolbar"
@@ -18,7 +19,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/vevent_scroll">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -130,7 +132,8 @@
                     <ListView
                         android:id="@+id/vevent_members"
                         android:layout_width="match_parent"
-                        android:layout_height="150dp"></ListView>
+                        android:layout_height="150dp">
+                    </ListView>
 
                     <ImageButton
                         android:id="@+id/action_join_event"

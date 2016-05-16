@@ -7,7 +7,7 @@
     tools:context="com.tssssa.sgaheer.groupify.ViewUser">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/vuser_toolbar"
+        android:id="@+id/vfriend_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -31,13 +31,13 @@
                 android:src="@drawable/materialwallpaper" />
 
             <RelativeLayout
-                android:id="@+id/vuser_form"
+                android:id="@+id/vevent_form"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/vevent_toolbar">
 
                 <LinearLayout
-                    android:id="@+id/view_user_form"
+                    android:id="@+id/view_event_form"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -56,7 +56,7 @@
                         android:paddingTop="10dp">
 
                         <TextView
-                            android:id="@+id/view_username"
+                            android:id="@+id/view_friend_username"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:elevation="3dp"
@@ -68,7 +68,7 @@
                             android:textSize="25sp" />
 
                         <TextView
-                            android:id="@+id/view_user_email"
+                            android:id="@+id/view_friend_email"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:elevation="3dp"
@@ -82,19 +82,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="5dp">
-                    <com.tssssa.sgaheer.groupify.UserLevelCircle
-                        android:id="@+id/userlevel"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp" />
-                    <TextView
-                        android:id="@+id/level_number"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginTop="13dp"
-                        android:textColor="@color/colorPrimaryDarker"
-                        android:textSize="40sp"
-                        android:paddingLeft="24dp"/>
+                        <com.tssssa.sgaheer.groupify.UserLevelCircle
+                            android:id="@+id/friendlevel"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp" />
+                        <TextView
+                            android:id="@+id/friend_level_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginTop="13dp"
+                            android:textColor="@color/colorPrimaryDarker"
+                            android:textSize="40sp"
+                            android:paddingLeft="24dp"/>
                     </RelativeLayout>
                 </LinearLayout>
             </RelativeLayout>
@@ -102,7 +102,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingTop="5dp">
+                android:paddingTop="8dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -117,13 +117,16 @@
                         android:textSize="20sp"
                         android:textStyle="italic"/>
 
-                        <EditText
-                            android:id="@+id/view_user_name"
-                            android:layout_width="250dp"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/vEname"
-                            android:maxLines="1"
-                            android:singleLine="true" />
+                    <TextView
+                        android:id="@+id/view_friend_name"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/vEname"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:paddingTop="5dp"
+                        android:textSize="30sp"
+                        />
 
                 </LinearLayout>
                 <LinearLayout
@@ -140,18 +143,21 @@
                         android:textSize="20sp"
                         android:textStyle="italic"/>
 
-                        <EditText
-                            android:id="@+id/view_user_program"
-                            android:layout_width="250dp"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/vEprogram"
-                            android:maxLines="1"
-                            android:singleLine="true" />
+                    <TextView
+                        android:id="@+id/view_friend_program"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/vEprogram"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textSize="18sp"
+                        />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingTop="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -164,43 +170,50 @@
                         android:gravity="center"
                         android:textStyle="italic"/>
 
-                    <EditText
-                        android:id="@+id/view_user_course1"
+                    <TextView
+                        android:id="@+id/view_friend_course1"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:hint="@string/vEcourse"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:gravity="center"
-                        android:layout_gravity="center"/>
-                    <EditText
-                        android:id="@+id/view_user_course2"
+                        android:layout_gravity="center"
+                        android:textSize="18sp"
+                        />
+                    <TextView
+                        android:id="@+id/view_friend_course2"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:hint="@string/vEcourse"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:gravity="center"
-                        android:layout_gravity="center"/>
-                    <EditText
-                        android:id="@+id/view_user_course3"
+                        android:layout_gravity="center"
+                        android:textSize="18sp"
+                        />
+                    <TextView
+                        android:id="@+id/view_friend_course3"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:hint="@string/vEcourse"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:gravity="center"
-                        android:layout_gravity="center"/>
-                    <EditText
-                        android:id="@+id/view_user_course4"
+                        android:layout_gravity="center"
+                        android:textSize="18sp"
+                        />
+                    <TextView
+                        android:id="@+id/view_friend_course4"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:hint="@string/vEcourse"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:gravity="center"
-                        android:layout_gravity="center"/>
-
+                        android:layout_gravity="center"
+                        android:textSize="18sp"
+                        />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

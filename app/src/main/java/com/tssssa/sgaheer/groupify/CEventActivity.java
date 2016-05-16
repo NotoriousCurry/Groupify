@@ -28,7 +28,10 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * Created by sgaheer on 29/05/2016.
+ * This class is used to handle the create event page & contains code to write to firebase
+ */
 public class CEventActivity extends AppCompatActivity {
     public final static String CREATE_MESSAGE = "com.tssssa.sgaheer.groupify.CREATE";
     private Toolbar ceventToolbar;

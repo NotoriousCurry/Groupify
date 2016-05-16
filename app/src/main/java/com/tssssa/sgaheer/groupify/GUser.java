@@ -2,6 +2,7 @@ package com.tssssa.sgaheer.groupify;
 
 /**
  * Created by sgaheer on 26/04/2016.
+ * This is a constructor class for users
  */
 public class GUser {
     private String idNumber;

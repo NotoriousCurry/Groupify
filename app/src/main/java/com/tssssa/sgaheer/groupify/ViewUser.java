@@ -21,6 +21,13 @@ import com.firebase.client.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
+
+/**
+ * Created by sgaheer on 13/05/2016.
+ * This class is used to handle the view personal account/user page
+ * Contains code to read & write user account details to firebase
+ */
 
 
 public class ViewUser extends AppCompatActivity {
@@ -53,12 +60,20 @@ public class ViewUser extends AppCompatActivity {
         courseTwo = (EditText) findViewById(R.id.view_user_course2);
         courseThree = (EditText) findViewById(R.id.view_user_course3);
         courseFour = (EditText) findViewById(R.id.view_user_course4);
+        UserLevelCircle circle = (UserLevelCircle) findViewById(R.id.userlevel);
+        TextView usrLvl = (TextView) findViewById(R.id.level_number);
 
         vuserToolbar = (Toolbar) findViewById(R.id.vuser_toolbar);
         setSupportActionBar(vuserToolbar);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
+        Random r = new Random();
+        int ri = r.nextInt(9 - 1) + 1;
+        usrLvl.setText(Integer.toString(ri));
+        AnimateLevel animate = new AnimateLevel(circle, 210);
+        animate.setDuration(1700);
+        circle.startAnimation(animate);
         getDetails();
     }
 

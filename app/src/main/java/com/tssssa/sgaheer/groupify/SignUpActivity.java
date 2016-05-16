@@ -23,6 +23,12 @@ import android.widget.Toast;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Created by sgaheer on 28/04/2016.
+ * This class is used to handle the sign up page for creating new user accounts
+ * Contain basic error checking code to ensure passwords arent inputted wrong
+ */
+
 public class SignUpActivity extends AppCompatActivity {
     private ProgressDialog mAuthProgressDialog;
     private Button sign;

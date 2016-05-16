@@ -5,6 +5,8 @@ import java.util.List;
 
 /**
  * Created by sgaheer on 1/05/2016.
+ * This is a constructor class for GROUPS
+ * Currently not being implemented
  */
 public class GGroup {
     private String gName;

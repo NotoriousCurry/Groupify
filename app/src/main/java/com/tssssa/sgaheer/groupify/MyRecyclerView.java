@@ -9,6 +9,8 @@ import android.view.View;
 
 /**
  * Created by sgaheer on 13/05/2016.
+ * This is a custom class that extends the normal RecyclerView in order to apply animation effects
+ * when loading in cards from CardView
  */
 public class MyRecyclerView extends RecyclerView {
     private Boolean mScrollable;

@@ -39,17 +39,22 @@
             android:name=".CEventActivity"
             android:label="@string/action_cevent"
             android:parentActivityName=".HomeActivity" />
-        <activity android:name=".CardActivity" />
         <activity
             android:name=".ViewEvent"
             android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".ViewUser"
-            android:parentActivityName=".HomeActivity"></activity>
+            android:parentActivityName=".HomeActivity" />
 
         <service
             android:name=".NotificationService"
-            android:exported="false"></service>
+            android:exported="false" />
+
+        <activity
+            android:name=".ViewFriend"
+            android:parentActivityName=".ViewEvent"></activity>
+        <activity android:name=".HelpActivity"
+            android:parentActivityName=".HomeActivity"></activity>
     </application>
 
 </manifest>

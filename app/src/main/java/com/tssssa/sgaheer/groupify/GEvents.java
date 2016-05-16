@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Created by sgaheer on 1/05/2016.
+ * This is a constructor class for events
  */
 public class GEvents {
     private String name;

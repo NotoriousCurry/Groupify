@@ -24,6 +24,12 @@ import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
 
+/**
+ * Created by sgaheer on 30/04/2016.
+ * This class is used to handle home screen interface
+ * Contain code to load in data from firebase to fill CardView and to obtain username
+ */
+
 public class HomeActivity extends AppCompatActivity {
     private Firebase mFirebaseRef;
     private MyRecyclerView mRecyclerView;
@@ -132,8 +138,8 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(goToViewAcct);
                 return true;
             case R.id.get_help:
-                toastText = "Go To Help";
-                toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
+                Intent goToHelp = new Intent(this, HelpActivity.class);
+                startActivity(goToHelp);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

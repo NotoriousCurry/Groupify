@@ -20,6 +20,7 @@ import java.util.Map;
 
 /**
  * Created by sgaheer on 26/04/2016.
+ * This class is used to handle the sign in page & is linked to the activity_login UI
  */
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = LoginActivity.class.getSimpleName();

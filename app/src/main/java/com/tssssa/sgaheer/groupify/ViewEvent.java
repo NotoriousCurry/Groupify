@@ -5,19 +5,24 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.ViewUtils;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +36,11 @@ import com.firebase.client.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+/**
+ * Created by sgaheer on 7/05/2016.
+ * This class is used to handle the viewing of individal events
+ * Contains code to read in data from firebase & to view a zoom in of the campus map
+ */
 
 public class ViewEvent extends AppCompatActivity {
     private Toast toast;
@@ -43,6 +53,7 @@ public class ViewEvent extends AppCompatActivity {
     private TextView veLoc;
     private TextView veDate;
     private ListView eventMembers;
+    private ScrollView scroll;
     private ImageButton jEvent;
     private Animator mCurrentAnimator;
 
@@ -51,6 +62,9 @@ public class ViewEvent extends AppCompatActivity {
     private int mAnimationDuration;
     private ArrayList<String> eMembers = new ArrayList<String>();
     private ArrayAdapter<String> eventAdapter;
+    public static final String EXTRA_USR = "com.tssssa.groupify.EXTRA_USR";
+    public static final String EXTRA_ID = "com.tssssa.groupify.EXTRA_ID";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +79,17 @@ public class ViewEvent extends AppCompatActivity {
         veDate = (TextView) findViewById(R.id.view_event_date);
         eventMembers = (ListView) findViewById(R.id.vevent_members);
         eventMembers.setBackgroundColor(getResources().getColor(R.color.ghostWhite));
+        eventMembers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(context, ViewFriend.class);
+                String n = (String)parent.getItemAtPosition(position).toString();
+                String i = (String)eMembers.get(position);
+                intent.putExtra(EXTRA_USR, n);
+                intent.putExtra(EXTRA_ID, i);
+                startActivity(intent);
+            }
+        });
 
         veventToolbar = (Toolbar) findViewById(R.id.vevent_toolbar);
         setSupportActionBar(veventToolbar);
@@ -83,6 +108,7 @@ public class ViewEvent extends AppCompatActivity {
         createIdList(eid);
         checkIfMember(eid);
 
+        jEvent.setFocusable(false);
         jEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,6 +136,7 @@ public class ViewEvent extends AppCompatActivity {
                 zoomImage(thumbnail, R.drawable.kmap);
             }
         });
+
     }
 
     private void getEventDetails(String eid) {
@@ -321,6 +348,7 @@ public class ViewEvent extends AppCompatActivity {
                 if(mCurrentAnimator != null) {
                     mCurrentAnimator.cancel();
                 }
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                 sett.play(ObjectAnimator.ofFloat(expandedImg, View.X, startB.left))
                         .with(ObjectAnimator.ofFloat(expandedImg, View.Y, startB.top))
                         .with(ObjectAnimator.ofFloat(expandedImg, View.SCALE_X, sScaleFinal))
