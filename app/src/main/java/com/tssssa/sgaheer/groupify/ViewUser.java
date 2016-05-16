@@ -70,8 +70,8 @@ public class ViewUser extends AppCompatActivity {
 
         Random r = new Random();
         int ri = r.nextInt(9 - 1) + 1;
-        usrLvl.setText(Integer.toString(ri));
-        AnimateLevel animate = new AnimateLevel(circle, 210);
+        usrLvl.setText("1");
+        AnimateLevel animate = new AnimateLevel(circle, 20);
         animate.setDuration(1700);
         circle.startAnimation(animate);
         getDetails();
